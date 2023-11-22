@@ -22,7 +22,7 @@ int main(int argc, char const *argv[])
             exit(1);
         }
         strcpy(patternPtr, patterns[i]);
-        pthread_create(&threads[i], NULL, searchForPatternInFile, patternPtr);
+        pthread_create(&threads[i], NULL, ThrdFunc, patternPtr);
         // searchForPatternInFile(patternPtr);
     }
 

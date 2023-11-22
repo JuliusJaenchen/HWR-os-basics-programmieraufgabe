@@ -9,7 +9,7 @@ char getPatternChar(char* patternPtr, int offset) {
     return *(patternPtr + offset);
 }
 
-void* searchForPatternInFile(void* arg) {
+void* ThrdFunc(void* arg) {
     char* patternPtr = (char*)arg;
     clock_t startTime = clock();
 

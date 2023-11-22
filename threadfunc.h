@@ -4,4 +4,4 @@
 #define PATTERN_COUNT 4
 
 
-void* searchForPatternInFile(void* args);
+void* ThrdFunc(void* args);
