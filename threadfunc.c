@@ -22,7 +22,7 @@ void* ThrdFunc(void* arg) {
 
     bool wasPatternFound = false;
     char lineBuffer[LINE_BUFFER_SIZE];
-    while (!wasPatternFound && (fgets(lineBuffer, LINE_BUFFER_SIZE, fileDescriptor)) != NULL) {
+    while (!wasPatternFound && fgets(lineBuffer, LINE_BUFFER_SIZE, fileDescriptor) != NULL) {
         bool shouldContinue = false;
         for (int i = 0; i < patternLength && !shouldContinue; i++) {
             if (pattern[i] != lineBuffer[i]) {
