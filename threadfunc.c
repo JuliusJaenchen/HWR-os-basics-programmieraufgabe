@@ -6,8 +6,13 @@ char getPatternChar(char* patternPtr, int offset) {
 }
 
 void* ThrdFunc(void* arg) {
-    char* patternPtr = (char*)arg;
     clock_t startTime = clock();
+    
+    char* pattern = (char*)arg;
+    int patternLength;
+    for (int i = 0; pattern[i] != '\0'; i++) {
+        patternLength = i;
+    }
 
     FILE* fileDescriptor = fopen(FILENAME, "r");
     if (fileDescriptor == NULL) {
@@ -15,31 +20,25 @@ void* ThrdFunc(void* arg) {
         exit(1);
     }
 
-    int patternCursorOffset = 0;
     bool wasPatternFound = false;
-    char ch;
-    while (!wasPatternFound && (ch = fgetc(fileDescriptor)) != EOF) {
-        // printf("ch: %c\n", ch);
-        bool doesCurrentCharacterMatch = (getPatternChar(patternPtr, patternCursorOffset) == ch);
-        // printf("does character match pattern? (offset: %d) %d\n", patternCursorOffset, doesCurrentCharacterMatch);
-        if (doesCurrentCharacterMatch) {
-            patternCursorOffset++;
-        } else {
-            patternCursorOffset = 0;
+    char lineBuffer[LINE_BUFFER_SIZE];
+    while (!wasPatternFound && (fgets(lineBuffer, LINE_BUFFER_SIZE, fileDescriptor)) != NULL) {
+        bool shouldContinue = false;
+        for (int i = 0; i < patternLength && !shouldContinue; i++) {
+            if (pattern[i] != lineBuffer[i]) {
+                shouldContinue = true;
+            }
         }
-
-        // check if pattern has no next unmatched character
-        if (getPatternChar(patternPtr, patternCursorOffset) == '\0') {
+        if (!shouldContinue) {
             wasPatternFound = true;
         }
     }
         
     double elapsedTime = (double)(clock() - startTime) / CLOCKS_PER_SEC;
-
     if (wasPatternFound) {
-        printf("Pattern '%s' was found in %s. Took %.5fs\n", patternPtr, FILENAME, elapsedTime);
+        printf("Pattern '%s' was found in %s. Took %.5fs\n", pattern, FILENAME, elapsedTime);
     } else {
-        printf("Pattern '%s' was not found in %s. Took %.5fs\n", patternPtr, FILENAME, elapsedTime);
+        printf("Pattern '%s' was not found in %s. Took %.5fs\n", pattern, FILENAME, elapsedTime);
     }
 
     fclose(fileDescriptor);
