@@ -30,9 +30,9 @@ void* ThrdFunc(void* arg) {
             
         double elapsedTime = (double)(clock() - startTime) / CLOCKS_PER_SEC;
         if (wasPatternFound) {
-            printf("Pattern '%s' was found in %s. Took %.5fs\n", pattern, FILENAME, elapsedTime);
+            printf("'%s' was found in %s. Took %.5fs\n", pattern, FILENAME, elapsedTime);
         } else {
-            printf("Pattern '%s' was not found in %s. Took %.5fs\n", pattern, FILENAME, elapsedTime);
+            printf("no line in %s starts with '%s'. Took %.5fs\n",  FILENAME, pattern, elapsedTime);
         }
     }
     

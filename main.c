@@ -4,6 +4,7 @@
 // TODO: test on windows
 int main(int argc, char const *argv[])
 {
+    clock_t startTime = clock();
     char* patterns[PATTERN_COUNT] = {"berlin", "dresden", "fokus", "wiesbaden"};
     pthread_t threads[PATTERN_COUNT];
     int exitStatus = 0;
@@ -24,6 +25,9 @@ int main(int argc, char const *argv[])
             free(errorMessage);
         }
     }
+    
+    double elapsedTime = (double)(clock() - startTime) / CLOCKS_PER_SEC;
+    printf("\ntotal execution time: %.5fs\n", elapsedTime);
 
     return exitStatus;
 }
