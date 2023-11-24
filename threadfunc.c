@@ -7,6 +7,8 @@ void* ThrdFunc(void* arg) {
     char* pattern = (char*)arg;
     int patternLength = strlen(pattern);
 
+    printf("started thread with id: %lu looking for starting word: '%s'\n", (unsigned long)pthread_self(), pattern);
+
     FILE* fileDescriptor = fopen(FILENAME, "r");
     if (fileDescriptor == NULL) {
         errorMessage = calloc(30 + strlen(FILENAME), sizeof(char));
