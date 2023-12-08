@@ -5,7 +5,7 @@ SRC_FILES = main.c threadfunc.c
 all: run
 
 search: $(SRC_FILES:.c=.o)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@.exe $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
