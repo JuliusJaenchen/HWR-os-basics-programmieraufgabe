@@ -1,7 +1,7 @@
 BINARY = main.exe
 
-run: 
-	gcc *.c -o $(BINARY) && ./$(BINARY)
+run:
+	gcc -o $(BINARY) main.c threadfunc.c -I. && ./$(BINARY)
 
 clean:
 	rm $(BINARY)
