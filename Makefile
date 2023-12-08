@@ -16,4 +16,4 @@ clean:
 	rm -f search.exe *.o
 
 run: search
-	./search
+	./search.exe
