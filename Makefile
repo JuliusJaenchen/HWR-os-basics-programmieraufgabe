@@ -1,7 +1,19 @@
-BINARY = main.exe
+CC = gcc
+CFLAGS = -Wall -std=c11
+SRC_FILES = main.c threadfunc.c
 
-run:
-	gcc -o $(BINARY) main.c threadfunc.c -I. && ./$(BINARY)
+all: run
+
+search: $(SRC_FILES:.c=.o)
+	$(CC) $(CFLAGS) -o $@ $^
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+.PHONY: clean run
 
 clean:
-	rm $(BINARY)
+	rm -f search.exe *.o
+
+run: search
+	./search
